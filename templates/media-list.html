@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			{% if 'username' in session %}
+				<div class="list-menu">
+					<a href="{{url_for('newItem')}}">add new</a>
+				</div>
+			{% endif %}
+
+			<h1>{{title}}</h1>
+
+			<ul>
+				{% for myMedia in media %}
+					<li>
+						<a href="{{url_for('showItem', urlname=myMedia.urlname)}}">
+						{{myMedia.name}}</a>
+						{% if (title=='Recently Added') %}
+							({{myMedia.media_type}})
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+
+		</main>
+	</div>
+
+{% endblock %}

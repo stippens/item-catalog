@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			{% if 'username' in session %}
+				<div class="list-menu">
+					<a href="{{url_for('newItem')}}">add new</a>
+				</div>
+			{% endif %}
+
+			<div class="media-list-title">{{title}}</div>
+
+			{% for myMedia in media %}
+				{% if loop.first %}
+					<h1>{{myMedia.media_type}}</h1>
+					<ul>
+				{% endif %}
+				{% if loop.changed(myMedia.media_type) and not loop.first %}
+					</ul>
+					<h1>{{myMedia.media_type}}</h1>
+					<ul>
+				{% endif %}
+				<li>
+					<a href="{{url_for('showItem', urlname=myMedia.urlname)}}">{{myMedia.name}}</a>
+				</li>
+				{% if loop.last %}
+					</ul>
+				{% endif %}
+			{% endfor %}
+
+		</main>
+	</div>
+
+{% endblock %}

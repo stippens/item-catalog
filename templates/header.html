@@ -1,0 +1,17 @@
+<header>
+	<div class="title">
+		Future Media
+	</div>
+	<div class="user-info">
+		<div class="user-name">
+			{% if 'username' in session %}
+				User: {{session.username}}
+			{% endif %}
+		</div>
+		{% if 'username' not in session %}
+			<button onclick="location.href='{{url_for('showLogin')}}'">Login</button>
+		{% else %}
+			<button onclick="location.href='{{url_for('disconnect')}}'">Logout</button>
+		{% endif %}
+	</div>
+</header>

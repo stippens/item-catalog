@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			<div class="list-menu">
+				add new
+			</div>
+			<h2>Edit Item</h2>
+			<form action="{{ url_for('editItem',urlname=item.urlname)}}" method = "post">
+				<div>
+					<label for="media_type">Media:</label>
+					<select name="media_type">
+						<option value="book" {% if item.media_type=='book' %}selected{% endif %}>Book</option>
+						<option value="movie" {% if item.media_type=='movie' %}selected{% endif %}>Movie</option>
+						<option value="video-game" {% if item.media_type=='video-game' %}selected{% endif %}>Video Game</option>
+					</select>
+					<br>
+					<label for="name">Name:</label>
+					<input type ="text" name="name" value="{{item.name}}">
+					<br>
+					<label for="description">Description:</label>
+					<input type ="text" name="description" value="{{item.description}}">
+					<br>
+					<br>
+					<br>
+					<button type="submit">Save</button>
+				</div>
+			</form>
+			<a href='{{url_for('showItem', urlname=item.urlname)}}'>
+				<button>Cancel</button>
+			</a>
+
+		</main>
+	</div>
+
+{% endblock %}

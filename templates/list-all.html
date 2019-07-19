@@ -1,0 +1,58 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			{% if 'username' in session %}
+				<div class="list-menu">
+					<a href="{{url_for('newItem')}}">add new</a>
+				</div>
+			{% endif %}
+
+			<div class="media-list-title">{{title}}</div>
+
+			{% for myBook in books %}
+				{% if loop.first %}
+					<h1>Books</h1>
+					<ul>
+				{% endif %}
+				<li>
+					<a href="{{url_for('showItem', urlname=myBook.urlname)}}">{{myBook.name}}</a>
+				</li>
+				{% if loop.last %}
+					</ul>
+				{% endif %}
+			{% endfor %}
+
+			{% for myMovie in movies %}
+				{% if loop.first %}
+					<h1>Movies</h1>
+					<ul>
+				{% endif %}
+				<li>
+					<a href="{{url_for('showItem', urlname=myMovie.urlname)}}">{{myMovie.name}}</a>
+				</li>
+				{% if loop.last %}
+					</ul>
+				{% endif %}
+			{% endfor %}
+
+			{% for myGame in games %}
+				{% if loop.first %}
+					<h1>Video Games</h1>
+					<ul>
+				{% endif %}
+				<li>
+					<a href="{{url_for('showItem', urlname=myGame.urlname)}}">{{myGame.name}}</a>
+				</li>
+				{% if loop.last %}
+					</ul>
+				{% endif %}
+			{% endfor %}
+
+
+		</main>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+<nav>
+	<h1>Media</h1>
+	<button><a href="{{url_for('showAll')}}"}>All</a></button>
+	<button><a href="{{url_for('viewAll')}}"}>Alternative All</a></button>
+	<button><a href="{{url_for('showBooks')}}"}>Books</a></button>
+	<button><a href="{{url_for('showMovies')}}"}>Movies</a></button>
+	<button><a href="{{url_for('showGames')}}"}>Games</a></button>
+	<p class="padding"></p>
+	<button><a href="{{url_for('showRecent')}}"}>Recent</a></button>
+	{% if 'username' in session %}
+		<button><a href="{{url_for('showMyMedia')}}"}>My Media</a></button>
+	{% endif %}
+</nav>

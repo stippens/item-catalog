@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			<h2>DELETE {{item.media_type}}</h2>
+			<h1>{{item.name}}</h1>
+			<form action="#" method = 'post'>
+				<button type="submit">Delete</button>
+			</form>
+			<a href = "{{url_for('showItem', urlname=item.urlname)}}">
+				<button>Cancel</button>
+			</a>
+		</main>
+	</div>
+
+{% endblock %}

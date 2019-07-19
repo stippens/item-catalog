@@ -1,0 +1,79 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			<h2>Login via Google</h2>
+
+			<!-- GOOGLE PLUS SIGN IN-->
+			<button id="signinButton">Sign in with Google</button>
+			<div id="result"></div>
+			<script>
+				$('#signinButton').click(function()
+				{
+					// signInCallback defined in step 6.
+					auth2.grantOfflineAccess().then(signInCallback);
+				});
+			</script>
+
+			<script>
+				function signInCallback(authResult)
+				{
+					if (authResult['code'])
+					{
+						// Hide the sign-in button now that the user is authorized, for example:
+						$('#signinButton').attr('style', 'display: none');
+
+						// Send the code to the server
+						$.ajax({
+							type: 'POST',
+							url: '/gconnect?state={{STATE}}',
+							// Always include an `X-Requested-With` header in every AJAX request,
+							// to protect against CSRF attacks.
+							headers: {
+								'X-Requested-With': 'XMLHttpRequest'
+							},
+							contentType: 'application/octet-stream; charset=utf-8',
+							success: function(result)
+							{
+								console.log("Gconnect Successful")
+								if(result)
+								{
+									$('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+									setTimeout( function()
+									{
+										window.location.href = "/";
+									}, 4000);
+								}
+								else if( authResult['error'] )
+								{
+									console.log('There was an error: ' + authResult['error']);
+								}
+								else
+								{
+									$('#result').html('Failed to make a server side call. Check your configuration and console.');
+								}
+							},
+							error: function(result)
+							{
+								console.log('Error in Google Login: ');
+								console.log(result);
+							},
+							processData: false,
+							data: authResult['code']
+						});
+					}
+					else
+					{
+						console.log("Error:");
+						console.log(error);
+					}
+				}
+			</script>
+
+
+		</main>
+	</div>
+
+{% endblock %}

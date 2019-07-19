@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+		<script>
+			// Load the auth2 library and call gapi.auth2.init() to initialize the GoogleAuth object
+			function start()
+			{
+				gapi.load('auth2', function()
+				{
+					auth2 = gapi.auth2.init(
+					{
+						client_id: '249427387088-nhqgjf9oiej184iqe9e8439e0qtk28n8.apps.googleusercontent.com',
+						// Scopes to request in addition to 'profile' and 'email'
+						scope: 'profile email openid'
+					});
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div class="page-container">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			<h2>NOT AUTHORIZED</h2>
+			<p>You are not authorized to perform the action attempted!  Stop it!
+			Seriously we're a small startup trying to get started.  Go pick on the
+			big guys who are putting up blockades to free and clear competition.
+			Use your power for good.</p>
+			<button onclick="location.href='{{url_for('showAll')}}'">Continue</button>
+		</main>
+	</div>
+
+{% endblock %}

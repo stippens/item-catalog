@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block content %}
+	{% include "header.html" %}
+	<script type="text/javascript">
+		let myMedia = '';
+		switch ('{{item.media_type}}')
+		{
+			case 'book': myMedia='Book'; break;
+			case 'movie': myMedia='Movie'; break;
+			case 'video-game': myMedia='Video Game'; break;
+		}
+	</script>
+	<div class="content">
+		{% include "nav.html" %}
+		<main>
+			{% if 'username' in session and item.user_id==session['user_id']%}
+				<div class="list-menu">
+					<a href="{{url_for('editItem', urlname=item.urlname)}}">edit</a>
+					<a href="{{url_for('deleteItem', urlname=item.urlname)}}">delete</a>
+				</div>
+			{% endif %}
+			<h2><script type="text/javascript">document.write(myMedia)</script></h2>
+			<h1>{{item.name}}</h1>
+			<p>
+				{{item.description}}
+			</p>
+
+		</main>
+	</div>
+
+{% endblock %}
